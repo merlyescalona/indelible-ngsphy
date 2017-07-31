@@ -1,4 +1,5 @@
-#INDELible
+# INDELible
+
 This is a modified version of INDELible, A powerful and flexible simulator of biological evolution.
 
 [Fletcher, W. and Yang, Z. 2009. INDELible: a flexible simulator of biological sequence evolution. Mol. Biol. and Evol. 2009 26(8):1879-1888](http://abacus.gene.ucl.ac.uk/software/indelible/)
@@ -17,7 +18,7 @@ The help folder contains the manual and tutorial from the website.
 
 The src folder contains the source code and compilation instructions.
 
-If you have a question, want to check if there is a newer version of INDELible, 
+If you have a question, want to check if there is a newer version of INDELible,
 or want to report a bug then please go to:
 
 [http://abacus.gene.ucl.ac.uk/software/indelible/](http://abacus.gene.ucl.ac.uk/software/indelible/)
@@ -25,7 +26,7 @@ or want to report a bug then please go to:
 Please note that if I discover small bugs that do not affect simulation output
 then I will just fix them and not release a new version of INDELible.
 
-If bugs are uncovered that may affect simulation output then I will fix them and 
+If bugs are uncovered that may affect simulation output then I will fix them and
 release a new version e.g. V1.01, V1.02 and so on.
 
 Therefore, please make sure to check back at the web address above for any

@@ -895,13 +895,6 @@ void makeseq2(int length,  vector<site> &myseq, double &sdiff, double timeleft)
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void readrootfromfile(int &seqsize, vector<int> &rootseq){
-
-
-}
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void makeseq(int length2,  vector<int> &myseq)
 {
@@ -4073,7 +4066,7 @@ void setuprootseq2(RATES &rates,	vector<int> &rootseqINT,
     string wordstring;
     refstream.open(referencefilename.c_str());
     while(refstream.good()){ char c=refstream.get();  allchars.push_back(c); }
-    cout <<"Read all characters from the reference file"<<endl;
+    // cout <<"Read all characters from the reference file"<<endl;
     bool endDescription=false;    bool referenceFasta=false;
     char c;
     for (unsigned int index=0; index<allchars.size();index++){
@@ -4103,23 +4096,23 @@ void setuprootseq2(RATES &rates,	vector<int> &rootseqINT,
       }
     }
     refstream.close();
-    cout<<"partitionname: " <<partitionname<<endl;
-    cout<<"descriptions.size(): "<<descriptions.size()<<endl;
-    cout<<"references.size(): "<<references.size()<<endl;
+    // cout<<"partitionname: " <<partitionname<<endl;
+    // cout<<"descriptions.size(): "<<descriptions.size()<<endl;
+    // cout<<"references.size(): "<<references.size()<<endl;
 
     word.clear(); wordstring.clear();
     string tmpDescription;
     unsigned int partitionRef=0;
     for (unsigned int index=0; index<descriptions.size();index++){
       tmpDescription=descriptions.at(index).substr(1,descriptions.at(index).size());
-      cout <<index<<" | "<<tmpDescription<<endl;
+    //   cout <<index<<" | "<<tmpDescription<<endl;
       if (partitionname==tmpDescription){
         partitionRef=index;
       }
     }
     tmpDescription=descriptions.at(partitionRef).substr(1,descriptions.at(partitionRef).size());
-    cout  <<tmpDescription<<endl;
-    cout  <<partitionRef<<endl;
+    // cout  <<tmpDescription<<endl;
+    // cout  <<partitionRef<<endl;
     if(partitionname!=tmpDescription){
       controlerrorprint2("[NGSPhy I/O]", "","","Reference sequence description does not match to any partition name.\nPlease verify","");
       exit(-1);
@@ -4808,16 +4801,27 @@ LOG = new ofstream;
 				vector<int>* myrootseq=&(  ((*p).rootseqints).at(partitionnumber)   );
 
 
-	     // create root sequence if necessary and setup
-        // setuprootseq(rates, *myrootseq, partitionnumber,
-              // TsequencesINT.at(partitionnumber), TinsPOS.at(partitionnumber),
-              // TinsINT.at(partitionnumber), sums);
-        cout<<"partitionnumber: "<<partitionnumber<<endl;
-        cout<<"partitionname: "<<totalpartitionnames.at(partitionnumber)    <<endl;
-  			setuprootseq2(rates, *myrootseq, partitionnumber,
-          totalpartitionnames.at(partitionnumber),
-          TsequencesINT.at(partitionnumber), TinsPOS.at(partitionnumber),
-          TinsINT.at(partitionnumber), sums);
+        	     // create root sequence if necessary and setup
+                 // setuprootseq(rates, *myrootseq, partitionnumber,
+                 // TsequencesINT.at(partitionnumber), TinsPOS.at(partitionnumber),
+                 // TinsINT.at(partitionnumber), sums);
+                // ME (2017)
+                // cout<<"partitionnumber: "<<partitionnumber<<endl;
+                // cout<<"partitionname: "<<totalpartitionnames.at(partitionnumber)    <<endl;
+                ifstream refstream;
+                refstream.open(referencefilename.c_str());
+                if (refstream.good()){
+                    setuprootseq2(rates, *myrootseq, partitionnumber,
+                        totalpartitionnames.at(partitionnumber),
+                        TsequencesINT.at(partitionnumber), TinsPOS.at(partitionnumber),
+                        TinsINT.at(partitionnumber), sums);
+                }else{
+                    setuprootseq(rates, *myrootseq, partitionnumber,
+                        TsequencesINT.at(partitionnumber), TinsPOS.at(partitionnumber),
+                        TinsINT.at(partitionnumber), sums);
+                }
+                refstream.close();
+
 
 
 				#ifdef timewatch
