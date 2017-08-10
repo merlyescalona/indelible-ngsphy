@@ -377,7 +377,7 @@ public:
 };
 
 ////////////////////////////////////////
-string referencefilename="reference.fasta";
+string referencefilename="ancestral.fasta";
 string masterfilename="control.txt";
 vector<model> mymodels;
 vector<int> siteclasses;
