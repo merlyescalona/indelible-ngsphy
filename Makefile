@@ -10,4 +10,4 @@ $(PROGRAM):
 debug:
 	$(CC) -g -o $(BIN)/$(PROGRAM) -O4 $(SRC)/indelible.cpp $(CFLAGS)
 clean:
-	rm -f $(BIN)/$(PROGRAM) && rm -f $(PREFIX)/$(PROGRAM)
+	rm -f $(BIN)/$(PROGRAM)
