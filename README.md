@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/merlyescalona/indelible.svg?branch=master)](https://travis-ci.org/merlyescalona/indelible)
+
 # INDELible
 
 This is a modified version of INDELible, A powerful and flexible simulator of biological evolution.
