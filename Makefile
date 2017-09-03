@@ -1,5 +1,5 @@
 C=g++
-CFLAGS=-lm
+CFLAGS=-lm -O4
 BIN=bin
 SRC=src
 PROGRAM=indelible-ngsphy
