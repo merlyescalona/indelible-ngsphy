@@ -25,7 +25,8 @@
     Please visit http://www.gnu.org/licenses/ for a full copy of the license.
 */
 
-
+#include <wchar.h>
+#include <locale.h>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -92,8 +93,8 @@ string makesimtime()
 	mytime=localtime(&stringtime);
 
 	string s1="_",s2=asctime(mytime); //hexToAsci(%3A)
-	for(int i=0; i<s2.size()-1; i++) {if(s2[i]==':') s1+="."; else s1+=s2[i]; }
-	for(int j=0; j<s1.size(); j++) if(s1[j]==' ') s1[j]='_';
+	for(unsigned int i=0; i<s2.size()-1; i++) {if(s2[i]==':') s1+="."; else s1+=s2[i]; }
+	for(unsigned int j=0; j<s1.size(); j++) if(s1[j]==' ') s1[j]='_';
 	return s1;
 }
 
@@ -136,9 +137,9 @@ void controlerrorprint2(string blocktype, string blockname, string commandname, 
 
 	string tempstring;
 	char c;
-	int themaxsize=startline.size();
+	unsigned int themaxsize=startline.size();
 
-	for(int j0=0; j0<instring.size(); j0++)
+	for(unsigned int j0=0; j0<instring.size(); j0++)
 	{
 		c=instring[j0];
 		if(c=='\n')
@@ -155,21 +156,21 @@ void controlerrorprint2(string blocktype, string blockname, string commandname, 
 
 	cout<<endl<<endl; (*LOG)<<endl;
 
-	for(int i0=0; i0<toprint.size(); i0++)
+	for(unsigned int i0=0; i0<toprint.size(); i0++)
 	{
 		string tempstring2=toprint.at(i0);
-		for(int h1=tempstring2.size(); h1<themaxsize; h1++) tempstring2+=" ";
+		for(unsigned int h1=tempstring2.size(); h1<themaxsize; h1++) tempstring2+=" ";
 		toprint.at(i0)=tempstring2;
 	}
 
 	cout<<endl<<" +";  (*LOG)<<endl<<"+";
-	for(int i1=0; i1<themaxsize+2; i1++) {cout<<"-"; (*LOG)<<"-";}
+	for(unsigned int i1=0; i1<themaxsize+2; i1++) {cout<<"-"; (*LOG)<<"-";}
 	cout<<"+"<<endl;	(*LOG)<<"+"<<endl;
 
-	for(int i2=0; i2<toprint.size(); i2++) {cout<<" | "<<toprint.at(i2)<<" |"<<endl; (*LOG)<<"| "<<toprint.at(i2)<<" |"<<endl;}
+	for(unsigned int i2=0; i2<toprint.size(); i2++) {cout<<" | "<<toprint.at(i2)<<" |"<<endl; (*LOG)<<"| "<<toprint.at(i2)<<" |"<<endl;}
 
 	cout<<" +"; (*LOG)<<"+";
-	for(int i3=0; i3<themaxsize+2; i3++) {cout<<"-"; (*LOG)<<"-";}
+	for(unsigned int i3=0; i3<themaxsize+2; i3++) {cout<<"-"; (*LOG)<<"-";}
 	cout<<"+"<<endl<<endl;	(*LOG)<<"+"<<endl<<endl;
 
 
@@ -180,7 +181,7 @@ int checkthere(string mytest,vector<string> mylist)
 {
 	// returns -1 if mytest is not in mylist otherwise returns position in list
 	int blah=-1;
-	for(int h1=0; h1<mylist.size(); h1++) if(mylist.at(h1)==mytest) {blah=h1; break;}
+	for(unsigned int h1=0; h1<mylist.size(); h1++) if(mylist.at(h1)==mytest) {blah=h1; break;}
 	return blah;
 }
 
@@ -188,7 +189,7 @@ int checkthereN(int mytest,vector<int> mylist)
 {
 	// returns -1 if mytest is not in mylist otherwise returns position in list
 	int blah=-1;
-	for(int h1=0; h1<mylist.size(); h1++) if(mylist.at(h1)==mytest) {blah=h1; break;}
+	for(unsigned int h1=0; h1<mylist.size(); h1++) if(mylist.at(h1)==mytest) {blah=h1; break;}
 	return blah;
 }
 
@@ -200,7 +201,7 @@ bool AinB(char testchar, string referencestring)
 
 	bool answer1=false;
 
-	for(int i=0; i<referencestring.size(); i++) if(testchar==referencestring[i]) {answer1=true; break;}
+	for(unsigned int i=0; i<referencestring.size(); i++) if(testchar==referencestring[i]) {answer1=true; break;}
 
 	return answer1;
 }
@@ -213,7 +214,7 @@ bool AonlyfromB(string teststring, string referencestring)
 
 	bool answer;
 
-	for(int i=0; i<teststring.size(); i++)
+	for(unsigned int i=0; i<teststring.size(); i++)
 	{
 		answer=AinB(teststring[i],referencestring);
 		if(!answer) break;
@@ -232,7 +233,7 @@ bool allAinB(string teststring, string referencestring)
 
 	bool answer;
 
-	for(int i=0; i<teststring.size(); i++)
+	for(unsigned int i=0; i<teststring.size(); i++)
 	{
 		answer=AinB(teststring[i],referencestring);
 		if(!answer) break;
@@ -251,7 +252,7 @@ bool noneAinB(string teststring, string referencestring)
 
 	bool answer;
 
-	for(int i=0; i<teststring.size(); i++)
+	for(unsigned int i=0; i<teststring.size(); i++)
 	{
 		answer=AinB(teststring[i],referencestring);
 		if(answer) break;
@@ -300,7 +301,7 @@ public:
 
 		error=1;
 		treewithrootmodel=ttree;
-		for(int fd=0; fd<treewithrootmodel.size(); fd++) {char c=treewithrootmodel[fd]; if(c=='(' || c==')' || c==',' || c==';') baretree+=c;}
+		for(unsigned int fd=0; fd<treewithrootmodel.size(); fd++) {char c=treewithrootmodel[fd]; if(c=='(' || c==')' || c==',' || c==';') baretree+=c;}
 		name=myname;
 
 		if(error!=-1) error=getrootfreqs(treewithrootmodel);
@@ -383,7 +384,7 @@ private:
 		string n1=totalmodelnames.at(modelpositions.at(0));
 
 		geneticcode=mygeneticcode;
-		for(int ds=1; ds<modelpositions.size(); ds++)
+		for(unsigned int ds=1; ds<modelpositions.size(); ds++)
 		{
 			lastgeneticcode=mygeneticcode;
 			n2=n1;
@@ -418,7 +419,7 @@ private:
 		string n1=totalmodelnames.at(modelpositions.at(0)), n2;
 
 		geneticcode=rootgeneticcode;
-		for(int ds=1; ds<modelpositions.size(); ds++)
+		for(unsigned int ds=1; ds<modelpositions.size(); ds++)
 		{
 			amodel=&(totalmodels.at(modelpositions.at(ds)));
 			lastgeneticcode=(*amodel).geneticcode;
@@ -428,7 +429,7 @@ private:
 			stringstream dd1; dd1<<lastgeneticcode;   string d1=dd1.str();
 
 			bool codeerror=true;
-			for(int qwe=0; qwe<myallowedlist.size(); qwe++)
+			for(unsigned int qwe=0; qwe<myallowedlist.size(); qwe++)
 			{
 				if(lastgeneticcode==myallowedlist.at(qwe)) {codeerror=false; break;}
 			}
@@ -443,7 +444,7 @@ private:
 		// this function tests all the models found by buildbranches function. if the models do not exist, or if they
 		// have the wrong number of categories, or the categories have different proportions then an error is thrown.
 
-		for(int hgg=0; hgg<modelnames.size(); hgg++)
+		for(unsigned int hgg=0; hgg<modelnames.size(); hgg++)
 		{
 			string thisname=modelnames.at(hgg);
 
@@ -537,7 +538,7 @@ private:
 
 			int bracketcount=0;
 			bool istherehash=false;
-			for(int i=0; i<testtree.size(); i++)
+			for(unsigned int i=0; i<testtree.size(); i++)
 			{
 				c1=testtree[i];
 
@@ -556,7 +557,7 @@ private:
 				string rfstring="";
 
 
-				for(int rf=1; rf<testtree.size(); rf++)
+				for(unsigned int rf=1; rf<testtree.size(); rf++)
 				{
 					c1=testtree[rf];
 					if(c1=='(') bracketcount++;
@@ -581,7 +582,7 @@ private:
 
 				if(testtree[0]!='(')
 				{
-					for(int i1=0; i1<testtree.size(); i1++)
+					for(unsigned int i1=0; i1<testtree.size(); i1++)
 					{
 						///////////////////////////////////////////////////////////////////
 						c1=testtree[i1];
@@ -598,7 +599,7 @@ private:
 				}
 				else
 				{
-					for(int i=1; i<testtree.size(); i++)
+					for(unsigned int i=1; i<testtree.size(); i++)
 					{
 						c1=testtree[i];
 
@@ -627,7 +628,7 @@ private:
 					}
 					modelnames.push_back(modelnamestring);
 				}
-				for(int kd=0; kd<remaining.size(); kd++) buildbranches(remaining.at(kd),branchesname,modelnames);
+				for(unsigned int kd=0; kd<remaining.size(); kd++) buildbranches(remaining.at(kd),branchesname,modelnames);
 
 
 
@@ -722,7 +723,7 @@ private:
 		}
 
 
-		for(int ds=0; ds<mbpositions.size(); ds++)
+		for(unsigned int ds=0; ds<mbpositions.size(); ds++)
 		{
 			lastgeneticcode=geneticcode;
 			n2=n1;
@@ -756,7 +757,7 @@ private:
 
 	int sortoutnames(vector<string> &mbtrees, vector<string> &totalmodelnames, vector<string> &totalbranchnames)
 	{
-		for(int gh=0; gh<mbnames.size(); gh++)
+		for(unsigned int gh=0; gh<mbnames.size(); gh++)
 		{
 			bool modelorbranch=true;
 			string mbname=mbnames.at(gh);
@@ -784,7 +785,7 @@ private:
 					therearebranches=true;
 
 					vector<int> modpos=((*b).allmodelsused);
-					for(int o1=0; o1<modpos.size(); o1++)
+					for(unsigned int o1=0; o1<modpos.size(); o1++)
 					{
 						int y=modpos.at(o1);
 						int minicheck=checkthereN(y,allmodelsused);
@@ -795,7 +796,7 @@ private:
 
 				}
 
-				for(int yf=0; yf<tree.size(); yf++) {char c=tree[yf]; if(c=='(' || c==')' || c==',' || c==';') stree+=c;}
+				for(unsigned int yf=0; yf<tree.size(); yf++) {char c=tree[yf]; if(c=='(' || c==')' || c==',' || c==';') stree+=c;}
 
 				if(mbtree=="") mbtree=stree;
 
@@ -822,7 +823,7 @@ private:
 	{
 
 		int lastpos=-1;
-		for(int fc=0; fc<mbtrees.size(); fc++)
+		for(unsigned int fc=0; fc<mbtrees.size(); fc++)
 		{
 			string testtree=mbtrees.at(fc);
 
@@ -865,7 +866,7 @@ int teststring(int lastresult,  string com, vector<string> &allowed, string bloc
 
 	if(com[0]=='[')
 	{
-		for(int k=0; k<allowed.size(); k++) if(com==allowed.at(k)) {myresult=k; break;}
+		for(unsigned int k=0; k<allowed.size(); k++) if(com==allowed.at(k)) {myresult=k; break;}
 
 		if(myresult==-1)
 		{
@@ -1088,7 +1089,7 @@ int dealwithmodel(vector<string> &block)
 	if(!allAinB(hg,"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,.;()-_")) { controlerrorprint2("[MODEL]", hg, "", "First statement in a [MODEL] block must be a model name statement.\nThe name should only contain  ,.;()-_ and alpha-numeric characters.",hg); {if(breakonerror) return -1;} }
 	else
 	{
-		for(int i0=0; i0<hg.size(); i0++) if(hg[i0]!=' ') mymodelname+=hg[i0];
+		for(unsigned int i0=0; i0<hg.size(); i0++) if(hg[i0]!=' ') mymodelname+=hg[i0];
 	//	cout<<"MODEL NAME "<<mymodelname<<endl;
 
 		if(checkthere(mymodelname,totalmodelnames)!=-1)
@@ -1114,7 +1115,7 @@ int dealwithmodel(vector<string> &block)
 			// feature will be disabled in final program - so has not been checked after Dec 2008
 
 			mymodelname="";
-			for(int i0=1; i0<hg.size(); i0++) if(hg[i0]!=' ') mymodelname+=hg[i0];
+			for(unsigned int i0=1; i0<hg.size(); i0++) if(hg[i0]!=' ') mymodelname+=hg[i0];
 		//	cout<<"MODEL NAME 2"<<mymodelname<<endl;
 
 			if(mymodelname==name) {controlerrorprint2("[MODEL]", mymodelname, "", "You cannot copy a model within it's own definition statement!\nThe second model name should be different from "+mymodelname,""); {if(breakonerror) return -1;} }
@@ -1201,7 +1202,6 @@ int dealwithmodel(vector<string> &block)
 						double mq, ma, mb;
 
 						double entryd=0, totald=0, meand=0;
-						int thecount=0;
 
 						vector<double> usermodel;
 
@@ -1287,7 +1287,7 @@ int dealwithmodel(vector<string> &block)
 									stringstream df; df<<totald; string ff=df.str();
 									controlerrorprint2("[MODEL]", name, commands.at(lasttest), "User-defined indel model does not sum to 1 and so has been rescaled.\n(It summed to "+ff+") ","");
 
-									for(int i=0; i<usermodel.size(); i++) {(usermodel.at(i))/=totald; }
+									for(unsigned int i=0; i<usermodel.size(); i++) {(usermodel.at(i))/=totald; }
 								}
 
 								meand/=totald;
@@ -1369,7 +1369,7 @@ int dealwithmodel(vector<string> &block)
 							{
 								for(double u=1; u<mM+1; u++) {entryd=pow(u,-1*ma); totald+=entryd; meand+=( entryd * u );usermodel.push_back(totald); }
 
-								for(int i=0; i<usermodel.size(); i++) {(usermodel.at(i))/=totald;  }
+								for(unsigned int i=0; i<usermodel.size(); i++) {(usermodel.at(i))/=totald;  }
 							}
 							else
 							{
@@ -1424,7 +1424,7 @@ int dealwithmodel(vector<string> &block)
 
 							for(double u=1; u<mM+1; u++) {entryd=pow(mM*u/(mM-u+1),-1*mb); meand+=(u*entryd); totald+=entryd; usermodel.push_back(totald); }
 
-							for(int i=0; i<usermodel.size(); i++) {(usermodel.at(i))/=totald; }
+							for(unsigned int i=0; i<usermodel.size(); i++) {(usermodel.at(i))/=totald; }
 							meand/=totald;
 
 
@@ -1932,7 +1932,7 @@ int dealwithsites(vector<string> &block)
 		bool lastcomma=false;
 		bool modelnameempty=false;
 
-		for(int y=0; y<a.size(); y++)
+		for(unsigned int y=0; y<a.size(); y++)
 		{
 			if(lastcomma==true) {if(a[y]==',' || a[y-2]=='[' || a[y]==']') modelnameempty=true;  lastcomma=false;}
 
@@ -1964,7 +1964,7 @@ int dealwithsites(vector<string> &block)
 		}
 
 		bool writeon=false;
-		for(int y1=0; y1<a.size(); y1++)
+		for(unsigned int y1=0; y1<a.size(); y1++)
 		{
 			char c=a[y1];
 
@@ -2028,11 +2028,11 @@ int dealwithsites(vector<string> &block)
 		{
 			stringstream qwe; qwe<<sum; string blah=qwe.str();
 			controlerrorprint2("[SITES]", name, "", "Site class proportions summed to "+blah+" not 1,\nThey have been rescaled so that they sum to 1","");
-			for(int j=0; j<props.size(); j++) {props.at(j)/=sum;}// cout<<props.at(j)<<" ";} cout<<endl;
+			for(unsigned int j=0; j<props.size(); j++) {props.at(j)/=sum;}// cout<<props.at(j)<<" ";} cout<<endl;
 
 		}
 
-		for(int k=1; k<props.size(); k++) props.at(k)+=props.at(k-1);
+		for(unsigned int k=1; k<props.size(); k++) props.at(k)+=props.at(k-1);
 
 		//for(int k1=0; k1<props.size(); k1++) cout<<props.at(k1)<<" "; cout<<endl;
 
@@ -2112,7 +2112,6 @@ int dealwithbranches(vector<string> &block, bool iscodefixed)
 	if(mybracketleft==0)
 	{treeerror=true; controlerrorprint2("[BRANCHES]", name,"", "Branch class guide tree must contain as least one set of parentheses.",""); {if(breakonerror) return -1;}  }
 
-	bool myerror=true;
 	//cout<<"W"<<tree<<"W"<<endl;
 	int hashcount=0;
 	for(int yg=0; yg<size; yg++)
@@ -2269,7 +2268,7 @@ public:
 //		cout<<"Q "<<temptree<<endl;
 
 		tree="";
-		for(int yq=0; yq<temptree.size(); yq++) if(temptree[yq]!='S') tree+=temptree[yq];
+		for(unsigned int yq=0; yq<temptree.size(); yq++) if(temptree[yq]!='S') tree+=temptree[yq];
 
 //		cout<<"W "<<tree<<endl;
 
@@ -2293,7 +2292,8 @@ private:
 		vector<string> bits;
 		string s,t;
 
-		int bracketcount=1, pi;
+		int bracketcount=1;
+		unsigned int pi;
 
 		if(originaltree[0]=='(')
 		{
@@ -2323,7 +2323,7 @@ private:
 
 
 				pi++;
-				for(int yg=pi; yg<originaltree.size(); yg++) s+=originaltree[yg];
+				for(unsigned int yg=pi; yg<originaltree.size(); yg++) s+=originaltree[yg];
 
 				/*cout<<"length to add "<<s<<endl;*/
 
@@ -2391,14 +2391,14 @@ private:
 
 		tree=originaltree;
 
-		for(int uj=0; uj<tree.size(); uj++)
+		for(unsigned int uj=0; uj<tree.size(); uj++)
 		{
 			c=tree[uj];
 			if(c==',' || c==')')
 			{
 				branch=0;
 				int pos=-1;
-				for(int rf=0; rf<onestochange.size(); rf++)
+				for(unsigned int rf=0; rf<onestochange.size(); rf++)
 				{
 					//cout<<rf<<" "<<mylength<<"  "<<onestochange.at(rf)<<"  ";
 					if(mylength==onestochange.at(rf)) {pos=rf; /*cout<<whattochangeto.at(pos)<<endl;*/ break;}
@@ -2438,12 +2438,13 @@ private:
 		vector<string> bits;
 		string s,t;
 
-		int bracketcount=1, pi;
+		int bracketcount=1;
+		unsigned int pi;
 
 		if(originaltree[0]=='(')
 		{
 			//cout<<"Q"<<originaltree<<"W"<<endl;
-			for(pi=1; pi<originaltree.size(); pi++)
+			for(unsigned pi=1; pi<originaltree.size(); pi++)
 			{
 				char c=originaltree[pi];
 				if(c=='(') bracketcount++;
@@ -2466,7 +2467,7 @@ private:
 				if(originaltree[pi]!=':') { controlerrorprint2("[TREE]", name,"", "Something is wrong in the getnextdepthcommand.\n Please report this and it will be promptly fixed!",""); }
 
 				pi++;
-				for(int yg=pi; yg<originaltree.size(); yg++) s+=originaltree[yg];
+				for(unsigned int yg=pi; yg<originaltree.size(); yg++) s+=originaltree[yg];
 				/*cout<<"length to add "<<s<<endl;*/
 				depthsofar+=atof(s.c_str());
 
@@ -2516,7 +2517,7 @@ private:
 
 			bool lengthon=false;
 
-			for(pi=0; pi<originaltree.size(); pi++)
+			for(unsigned pi=0; pi<originaltree.size(); pi++)
 			{
 				if(lengthon) s+=originaltree[pi];
 
@@ -2545,7 +2546,7 @@ private:
 		double treelength=0;
 		char c;
 
-		for(int uj=0; uj<originaltree.size(); uj++)
+		for(unsigned int uj=0; uj<originaltree.size(); uj++)
 		{
 			c=originaltree[uj];
 			if(c==',' || c==')') {branch=0; double length=atof(mylength.c_str()); treelength+=length; mylength="";}
@@ -2565,7 +2566,7 @@ private:
 		string mylength, newtree;
 		char c;
 
-		for(int uj=0; uj<originaltree.size(); uj++)
+		for(unsigned int uj=0; uj<originaltree.size(); uj++)
 		{
 			c=originaltree[uj];
 			if(c==',' || c==')')
@@ -2789,7 +2790,7 @@ int dealwithtrees(vector<string> &block)
 						if(tempvec.size()==1) {rawvalue=tempvec.at(0);}// cout<<"RAWVALUE 1 "<<rawvalue<<endl;}
 						else
 						{
-							for(int jh=0; jh<tempvec.size(); jh++)
+							for(unsigned int jh=0; jh<tempvec.size(); jh++)
 							{
 								string bl=tempvec.at(jh);
 
@@ -2826,7 +2827,7 @@ int dealwithtrees(vector<string> &block)
 
 							// strip lengths from tree if there
 							bool skip=false;
-							for(int ds2=0; ds2<rawvalue.size(); ds2++)
+							for(unsigned int ds2=0; ds2<rawvalue.size(); ds2++)
 							{
 								c=rawvalue[ds2];
 								if(c==':') skip=true;
@@ -2840,7 +2841,7 @@ int dealwithtrees(vector<string> &block)
 							rawvalue3+=rawvalue2[0];
 							string newlength;
 
-							for(int ds1=1; ds1<rawvalue2.size()-1; ds1++)
+							for(unsigned int ds1=1; ds1<rawvalue2.size()-1; ds1++)
 							{
 								c1=rawvalue2[ds1-1];
 								c =rawvalue2[ds1];
@@ -2929,7 +2930,7 @@ int dealwithtrees(vector<string> &block)
 								lengthon=0; taxaon=0;
 
 								int zerowarn=0;
-								for(int yg=0; yg<currentlength.size(); yg++)
+								for(unsigned int yg=0; yg<currentlength.size(); yg++)
 								{
 									c=currentlength[yg];
 									if(!AinB(c,"0.")) zerowarn=1;
@@ -3069,7 +3070,7 @@ public:
 
 		rootseqints.assign(rootseqtxtvec.size(),blank);
 
-		for(int kk=0; kk<rootseqtxtvec.size(); kk++)
+		for(unsigned int kk=0; kk<rootseqtxtvec.size(); kk++)
 		{
 			string mbstype=mbstypes.at(kk);
 
@@ -3095,7 +3096,7 @@ private:
 
 		int ntaxa=t.ntaxa;
 
-		for(int p=1; p<posvec.size(); p++)
+		for(unsigned int p=1; p<posvec.size(); p++)
 		{
 			Tree t=totaltrees.at(posvec.at(p));
 			if(t.ntaxa != ntaxa)
@@ -3356,14 +3357,14 @@ int dealwithpartitions(vector<string> &block)
 				controlerrorprint2("[PARTITIONS]", name, "", "Statement [..] in a partitions block must contain 3 elements not "+dss+":\n[tree1 model/branchclass/siteclass rootlength] or "+"\n[tree2 model/branchclass/siteclass rootseqfilename]\nConsult manual for more information.",""); {if(breakonerror) return -1;}
 			}
 
-			t=s; s=""; for(int gj=0; gj<t.size()-1; gj++) s+=t[gj];
+			t=s; s=""; for(unsigned int gj=0; gj<t.size()-1; gj++) s+=t[gj];
 		}
 
 		if(s[0]=='[')
 		{
 			count=1;
 			if(s=="["){k++; s=block.at(k);}
-			else{t=s; s=""; for(int gj=1; gj<t.size(); gj++) s+=t[gj];}
+			else{t=s; s=""; for(unsigned int gj=1; gj<t.size(); gj++) s+=t[gj];}
 		}
 
 		if(count==1)
@@ -3386,7 +3387,7 @@ int dealwithpartitions(vector<string> &block)
 				Tree* testtree=&(totaltrees.at(treepos));
 
 				tree=(*testtree).tree;
-				for(int qw=0; qw<tree.size(); qw++) {char c=tree[qw]; if(c==')' || c=='(' || c==',' || c==';') strippedtree+=c;}
+				for(unsigned int qw=0; qw<tree.size(); qw++) {char c=tree[qw]; if(c==')' || c=='(' || c==',' || c==';') strippedtree+=c;}
 				treeposvec.push_back(treepos);
 
 				treenamevec.push_back(treename);
@@ -3440,7 +3441,7 @@ int dealwithpartitions(vector<string> &block)
 
 							if(!(*s).therearebranches) {}
 							else if(strippedtree.size()!=strippedtree2.size()) anerror=true;
-							else for(int we=0; we<strippedtree.size(); we++)
+							else for(unsigned int we=0; we<strippedtree.size(); we++)
 							{
 								char c1=strippedtree[we]; char c2=strippedtree2[we];
 								if(c1!=c2) {anerror=true; break;}
@@ -3464,7 +3465,7 @@ int dealwithpartitions(vector<string> &block)
 
 					bool anerror=false;
 					if(strippedtree.size()!=strippedtree2.size()) anerror=true;
-					else for(int we=0; we<strippedtree.size(); we++)
+					else for(unsigned int we=0; we<strippedtree.size(); we++)
 					{
 						char c1=strippedtree[we]; char c2=strippedtree2[we];
 						if(c1!=c2) {anerror=true; break;}
@@ -3627,7 +3628,7 @@ int dealwithpartitions(vector<string> &block)
 	} //	end of for(int k=1; k<mymy; k++) bracket
 
 	int t1=ntaxavec.at(0), t2;
-	for(int ft=1; ft<ntaxavec.size(); ft++)
+	for(unsigned int ft=1; ft<ntaxavec.size(); ft++)
 	{
 		// this bracket simply compares guide trees being used by different partitions in a simulation.
 		// They can be different but they need to have the same number of external branches
@@ -3710,7 +3711,7 @@ int dealwithevolve(vector<string> &block)
 		{
 			filenamestub=s3;
 			bool error=false;
-			for(int i=0; i<totalevolve.size(); i++)
+			for(unsigned int i=0; i<totalevolve.size(); i++)
 			{
 				if( (totalevolve.at(i)).filenamestub==filenamestub ) error=true;
 			}
@@ -3738,22 +3739,38 @@ int docontrol()
 	if1.open(masterfilename.c_str());
 
 	char c1='q', c2='q'; //,c2,c3,c4,c5,c6;
-	bool notwhitespace=true;
 	string s, newfilename=masterfilename;
 	vector<string> sv;
 
 
 	// get command blocks if they exist
-	ifstream paups, paupm, paupf;
+	wfstream paups, paupm, paupf;
 
 	paups.open("paupstart.txt");
 	paupm.open("paupmiddle.txt");
 	paupf.open("paupend.txt");
 
-	while(paups.good()) {char c=paups.get(); if(c!='�') paupstart+=c; }//cout<<c<<endl;}
-	while(paupm.good()) {char c=paupm.get(); if(c!='�') paupmiddle+=c; }//cout<<c<<endl;}
-	while(paupf.good()) {char c=paupf.get(); if(c!='�') paupend+=c; }//cout<<c<<endl;}
-
+	// this character is the lowercase y with umlaut
+	const wchar_t * compareTo=L"U+00FF";
+	while(paups.good()) {
+		wchar_t c=paups.get();
+		if (wcscmp(&c,compareTo)==0){
+			paupstart+=c;
+		}
+	}//cout<<c<<endl;}
+	while(paupm.good()) {
+		wchar_t c=paupm.get();
+		if (wcscmp(&c,compareTo)==0){
+			paupmiddle+=c;
+		}
+	}//cout<<c<<endl;}
+	while(paupf.good()) {
+		wchar_t c=paupf.get();
+		if (wcscmp(&c,compareTo)==0){
+			paupend+=c;
+		}
+	}//cout<<c<<endl;}
+	// U+00FF
 	if(paupstart!="") paupstart+="\n\n";
 	if(paupmiddle!="") paupmiddle+="\n"; paupmiddle+="\n";
 	if(paupend!="") paupend+="\n\n";
@@ -3829,7 +3846,7 @@ int docontrol()
 
 	int mymycount=0;
 
-	for(int th1=1; th1<temp1.size()-1; th1++)
+	for(unsigned int th1=1; th1<temp1.size()-1; th1++)
 	{
 		// this for loop will weed out any commented text between /* .... */ in the control file (from temp1 to temp2)
 
@@ -3845,7 +3862,7 @@ int docontrol()
 
 	temp2.push_back(' ');   WR=true;
 
-	for(int th2=0; th2<temp2.size()-1; th2++)
+	for(unsigned int th2=0; th2<temp2.size()-1; th2++)
 	{
 		// this for loop should get rid of any remaining lines that begin with double slash //
 		// or get rid of the end of any lines that have // ends to them
@@ -3861,7 +3878,7 @@ int docontrol()
 
 
 	// re-sorts information into "word size" string blocks
-	for(int th3=0; th3<temp3.size(); th3++)
+	for(unsigned int th3=0; th3<temp3.size(); th3++)
 	{
 		c1=temp3.at(th3);
 		                                     //  again this is to keep backward compatibility with all my old control files
@@ -3877,7 +3894,7 @@ int docontrol()
 
 	bool weareonbaby=false;
 
-	for(int sd=0; sd<sv.size()-1; sd++)
+	for(unsigned int sd=0; sd<sv.size()-1; sd++)
 	{
 		string sq1=sv.at(sd), sq2=sv.at(sd+1);
 		if(sq1=="[TYPE]" || sq1=="[SETTINGS]" || sq1=="[MODEL]" || sq1=="[SITES]" || sq1=="[BRANCHES]" || sq1=="[PARTITIONS]" || sq1=="[EVOLVE]" || sq1== "[BRANCHES*]") weareonbaby=false;
@@ -3900,7 +3917,7 @@ int docontrol()
 	{
 		bool weareonbaby=false;
 
-		for(int sd=0; sd<sv.size()-1; sd++)
+		for(unsigned int sd=0; sd<sv.size()-1; sd++)
 		{
 			string sq1=sv.at(sd), sq2=sv.at(sd+1);
 			if(sq1=="[submodel]") weareonbaby=true;
@@ -3954,7 +3971,7 @@ int docontrol()
 	else if(type==2)	{for(int pg=0; pg<17; pg++) replacenames.push_back(aminoacidmodelnames[pg]);   optionstring=option2;}
 	else if(type==1)	{for(int pg=0; pg<17; pg++) replacenames.push_back(nucleotidemodelnames[pg]);  optionstring=option1;}
 
-	for(int qw=1; qw<sv.size(); qw++)
+	for(unsigned int qw=1; qw<sv.size(); qw++)
 	{
 		string test=sv.at(qw), oldtest=sv.at(qw-1);
 
@@ -3966,7 +3983,7 @@ int docontrol()
 
 			bool error=true;
 			stringstream sss; string ss;
-			for(int pg=0; pg<replacenames.size(); pg++) if(replacenames.at(pg)==test) {sss<<pg; ss=sss.str(); sv.at(qw)=ss; error=false; break;}
+			for(unsigned int pg=0; pg<replacenames.size(); pg++) if(replacenames.at(pg)==test) {sss<<pg; ss=sss.str(); sv.at(qw)=ss; error=false; break;}
 
 			if(type==2 && error)
 			{
@@ -4034,7 +4051,7 @@ int docontrol()
 		if(sv.at(3)!="[MODEL]" && sv.at(3)!="[SETTINGS]") {isthereanerror=-1;	controlerrorprint2("[TYPE]","","","There is some text after the [TYPE] command before the first block.\n Is this a mistake? Was expecting a [MODEL] or [SETTINGS] block",sv.at(3)); return -1;}
 
 
-		if(isthereanerror!=-1) for(int i=3; i<sv.size(); i++)
+		if(isthereanerror!=-1) for(unsigned int i=3; i<sv.size(); i++)
 		{
 			// if there is no error then this function collects together blocks of same type etc.
 
@@ -4082,7 +4099,7 @@ int docontrol()
 		}
 
 
-	int p; //,q;
+	unsigned int p; //,q;
 
 	// settings blocks first!
 	if(isthereanerror!=-1 && numberofsettingsblocks>0) dealwithsettings(settingsV);

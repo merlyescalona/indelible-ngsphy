@@ -1,4 +1,2 @@
 language: c
 script: make
-after_success:
-  - coveralls

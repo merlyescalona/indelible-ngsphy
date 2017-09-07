@@ -5,7 +5,7 @@ SRC=src
 PROGRAM=indelible-ngsphy
 
 $(PROGRAM):
-	$(CC) -o $(BIN)/$(PROGRAM) -O4 $(SRC)/indelible.cpp $(CFLAGS)
+	$(CC) -o $(BIN)/$(PROGRAM) -O4 -w $(SRC)/indelible.cpp $(CFLAGS)
 
 debug:
 	$(CC) -g -o $(BIN)/$(PROGRAM) -O4 $(SRC)/indelible.cpp $(CFLAGS)
