@@ -4,13 +4,12 @@ else
 CC=g++
 endif
 
-CFLAGS= $(CFLAGS) -lm
+CFLAGS:= $(CFLAGS) -lm
 PERF=-O4
 DBG=-O0 -Wall
 BIN=bin
 SRC=src
 PROGRAM=indelible-ngsphy
-
 
 $(PROGRAM):
 	$(CC) $(CFLAGS) $(PERF) -w -o $(BIN)/$(PROGRAM) $(SRC)/indelible.cpp
