@@ -1,13 +1,24 @@
+ifndef CC
+CC=gcc
+else
 CC=g++
-CFLAGS=-lm
+endif
+
+CFLAGS= $(CFLAGS) -lm
+PERF=-O4
+DBG=-O0 -Wall
 BIN=bin
 SRC=src
 PROGRAM=indelible-ngsphy
 
+
 $(PROGRAM):
-	$(CC) -o $(BIN)/$(PROGRAM) -O4 -w $(SRC)/indelible.cpp $(CFLAGS)
+	$(CC) $(CFLAGS) $(PERF) -w -o $(BIN)/$(PROGRAM) $(SRC)/indelible.cpp
 
 debug:
-	$(CC) -g -o $(BIN)/$(PROGRAM) -O4 $(SRC)/indelible.cpp $(CFLAGS)
+	@echo "Compiling into DEBUG mode."
+	$(CC) $(CFLAGS) $(PERF) $(DBG) -g -o $(BIN)/$(PROGRAM) $(SRC)/indelible.cpp
+
 clean:
+	@echo "Removing executable and object files."
 	rm -f $(BIN)/$(PROGRAM)
