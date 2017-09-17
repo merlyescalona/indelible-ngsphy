@@ -6,6 +6,19 @@ This is a modified version of INDELible, A powerful and flexible simulator of bi
 
 [Fletcher, W. and Yang, Z. 2009. INDELible: a flexible simulator of biological sequence evolution. Mol. Biol. and Evol. 2009 26(8):1879-1888](http://abacus.gene.ucl.ac.uk/software/indelible/)
 
+This versions allows the use of an ancestral sequence to evolve for a single partition.
+The name of the sequence file should be `ancestral.fasta`
+
+To install use:
+
+```
+make
+```
+
+Or follow instructions from the original author in [INSTALL.md](INSTALL.md)
+
+M.E.
+
 # Original README file
 
 If the text files look strange on WINDOWS, please open them in WORDPAD, not NOTEPAD!!
