@@ -17,7 +17,4 @@ $(PROGRAM):
 debug:
 	@echo "Compiling into DEBUG mode."
 	$(CC) $(CFLAGS) $(PERF) $(DBG) -g -o $(BIN)/$(PROGRAM) $(SRC)/indelible.cpp
-
-clean:
-	@echo "Removing executable and object files."
-	rm -f $(BIN)/$(PROGRAM)
+	
