@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/merlyescalona/indelible.svg?branch=master)](https://travis-ci.org/merlyescalona/indelible)
+[![Build Status](https://travis-ci.org/merlyescalona/indelible-ngsphy.svg?branch=master)](https://travis-ci.org/merlyescalona/indelible-ngsphy)
 
 # INDELible
 
