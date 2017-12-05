@@ -645,7 +645,7 @@ void chooseNEWbase(int &newbase,  vector<double> JVecRow)
 	// choose new base according to jump matrix
 	myrand=mtrand1();
 
-	for(int i=0; i<JVecRow.size(); i++) {   if (myrand < JVecRow.at(i)) {newbase=i; break;}}
+	for(unsigned int i=0; i<JVecRow.size(); i++) {   if (myrand < JVecRow.at(i)) {newbase=i; break;}}
 }
 
 
@@ -658,7 +658,7 @@ int returnNewSiteClass(/*vector<int> &siteclasscount, */ vector<double> siteprop
 	if(siteprops.empty())  {cout<<endl<<endl<<"ERROR 1 in returnNEWsiteClass"<<endl<<endl; return 0;}
 	double rand=mtrand1(); //cout<<rate
 	int siteclass=-1;
-	for(int i1=0; i1<siteprops.size(); i1++)
+	for(unsigned int i1=0; i1<siteprops.size(); i1++)
 	{
 		if(rand<siteprops.at(i1)) {siteclass=i1; break;}
 	}
@@ -684,7 +684,7 @@ double returnNewSiteRate(int pos)
 		//for(int i1a=0; i1a<((*m).codoncatfreqs).size(); i1a++) cout<<((*m).codoncatfreqs).at(i1a)<<" "; cout<<endl;
 
 		rate=mtrand1(); //cout<<rate;
-		for(int i1=0; i1<((*m).cumfreqs).size(); i1++)
+		for(unsigned int i1=0; i1<((*m).cumfreqs).size(); i1++)
 		{
 			if(rate<((*m).cumfreqs).at(i1)) {rate=i1; break;}
 
@@ -760,7 +760,7 @@ double returnsitesubrate(double rate, int siteclass, int currentbase)
 
 int returnsiteclass()
 {
-	int i1;
+	unsigned int i1;
 
 	double rate=mtrand1();
 
@@ -844,7 +844,7 @@ vector<double> makecumfreqs(vector<double> basefreqs)
 {
 	vector<double> boundaries;
 	double s=0;
-	for(int yh=0; yh<basefreqs.size(); yh++) {s+=basefreqs.at(yh); /*cout<<"  W "<<basefreqs.at(yh)<<"  A  "<<s<<endl;*/ boundaries.push_back(s);}
+	for(unsigned int yh=0; yh<basefreqs.size(); yh++) {s+=basefreqs.at(yh); /*cout<<"  W "<<basefreqs.at(yh)<<"  A  "<<s<<endl;*/ boundaries.push_back(s);}
 
 	if(boundaries.back()-1>0.00000001) cout<<"make seq error in sum to 1 on boundaries "<<boundaries.back()<<" " <<boundaries.back()+1<<" "<<boundaries.back()-1<<endl;
 
@@ -867,7 +867,7 @@ void makeseq2(int length,  vector<site> &myseq, double &sdiff, double timeleft)
 		myrand=mtrand1();
 		bool wearenotdone=true;
 
-		for(int yh3=0; yh3<boundaries2.size(); yh3++) if(myrand<=boundaries2.at(yh3) )
+		for(unsigned int yh3=0; yh3<boundaries2.size(); yh3++) if(myrand<=boundaries2.at(yh3) )
 		{
 			wearenotdone=false;
 
@@ -914,7 +914,7 @@ void makeseq(int length2,  vector<int> &myseq)
 	{
 		myrand=mtrand1();
 
-		for(int yh3=0; yh3<boundaries2.size(); yh3++)
+		for(unsigned int yh3=0; yh3<boundaries2.size(); yh3++)
 		{
 			//cout<<"X "<<boundaries2.at(yh3)<<endl;
 			if( myrand<=boundaries2.at(yh3))
@@ -927,9 +927,7 @@ void makeseq(int length2,  vector<int> &myseq)
 		}
 
 	}
-
-
-//	cout<<"WOW "<<myseq.size()<<endl;
+	// cout<<"WOW "<<myseq.size()<<endl;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -943,7 +941,7 @@ vector<double> getbasefreqs(vector<int> &seq)
 	if(type==3) mymax=64;
 
 	basefreqs.assign(mymax,0);
-	for(int y2=1; y2<seq.size(); y2++) basefreqs.at(seq.at(y2))++;
+	for(unsigned int y2=1; y2<seq.size(); y2++) basefreqs.at(seq.at(y2))++;
 	for(int y3=0; y3<mymax;      y3++) basefreqs.at(y3)/=seq.size();
 
 	return basefreqs;
@@ -957,7 +955,7 @@ void fromprintseq(vector<string> &seq, vector<int> &myseq)
 	myseq.reserve(seq.size());
 
 	vector<string> myletters, myletters2;
-	int mysize;
+	unsigned int mysize;
 
 	if(type==1)
 	{
@@ -974,14 +972,14 @@ void fromprintseq(vector<string> &seq, vector<int> &myseq)
 	else cout<<"error in fromprintseq"<<endl;
 
 
-	for(int gv1=0; gv1<seq.size(); gv1++)
+	for(unsigned int gv1=0; gv1<seq.size(); gv1++)
 	{
 		string bb=seq.at(gv1);
 		int minimatch=-1;
 
-		for(int gv3=0; gv3<myletters.size(); gv3++) { if(bb==myletters.at(gv3)) {minimatch=gv3; break;} }
+		for(unsigned int gv3=0; gv3<myletters.size(); gv3++) { if(bb==myletters.at(gv3)) {minimatch=gv3; break;} }
 
-		if(minimatch==-1) for(int gv4=0; gv4<myletters2.size(); gv4++) { if(bb==myletters2.at(gv4)) {minimatch=gv4; break;} }
+		if(minimatch==-1) for(unsigned int gv4=0; gv4<myletters2.size(); gv4++) { if(bb==myletters2.at(gv4)) {minimatch=gv4; break;} }
 
 		if(minimatch==-1) {cout<<"ERROR in fromprintseq"<<endl<<" ";} else{myseq.push_back(minimatch);}
 
@@ -999,7 +997,7 @@ string nowhitespace(string guidetree)
 	int bracketright=0, bracketleft=0;
 	string guidetree2S;
 
-	for(int ghy11=0; ghy11<guidetree.size(); ghy11++)
+	for(unsigned int ghy11=0; ghy11<guidetree.size(); ghy11++)
 	{
 		// get rid of white space in tree
 		c=guidetree[ghy11];
@@ -1025,10 +1023,11 @@ int gettaxanames(int partitionnumber, string guidetree, vector<string> &taxaname
 
 	char c3='q',c2='q',c1='q';
 	string taxaname, tempstring, guidetree3;
-	int taxanameon=0, maxnamesize=0;
+	int taxanameon=0;
+    unsigned int maxnamesize=0;
 	taxanames.clear(); taxanames.push_back("ROOT");
 
-	for(int jh1=0; jh1<guidetree.size(); jh1++)   // get taxanames and replace them in tree;
+	for(unsigned int jh1=0; jh1<guidetree.size(); jh1++)   // get taxanames and replace them in tree;
 	{
 		c3=c2;c2=c1;c1=guidetree[jh1];
 		if(taxanameon==0) {if( c2=='(' || c2==',') {if(c1!='('){ taxanameon=1; taxaname="";}}}
@@ -1045,7 +1044,7 @@ int gettaxanames(int partitionnumber, string guidetree, vector<string> &taxaname
 			if(partitionnumber==0) {fd<<taxanames.size(); string fddd=fd.str(); guidetree3+=fddd; }
 			else
 			{
-				for(int gb2=0; gb2<partonetaxanames.size(); gb2++) {if(taxaname==partonetaxanames.at(gb2)) {minimatch=gb2; break;}}
+				for(unsigned int gb2=0; gb2<partonetaxanames.size(); gb2++) {if(taxaname==partonetaxanames.at(gb2)) {minimatch=gb2; break;}}
 
 				if(minimatch==-1)
 				{
@@ -1118,7 +1117,7 @@ int gettaxanames(int partitionnumber, string guidetree, vector<string> &taxaname
 		{
 			string tempname=taxanames.at(gn1);
 
-			if(!phylipnametruncate) for(int fg=tempname.size(); fg<maxnamesize+5; fg++) tempname+=" ";
+			if(!phylipnametruncate) for(unsigned int fg=tempname.size(); fg<maxnamesize+5; fg++) tempname+=" ";
 
 			taxaspacenames.at(gn1)=tempname;
 		}
@@ -1154,7 +1153,7 @@ string addnodestostring(string mytree, int &nodelabel)
 
 	string workingtree;
 
-	for(int gh11=0; gh11<mytree.size(); gh11++)
+	for(unsigned int gh11=0; gh11<mytree.size(); gh11++)
 	{
 		c1=c; c=mytree[gh11];
 		if(c1==')' && c==':' )
@@ -1174,7 +1173,7 @@ void getlabelstring(int &label, double &length,string &mystring)
 {
 	//gets tip label name and final length from terminal branch - used in evolvebranch
 	string labelstring, lengthstring;
-	int num=0;
+    unsigned int num=0;
 	char c=mystring[num];
 	while(c!=':'){labelstring+=c;  num++;c=mystring[num]; }
 
@@ -1194,7 +1193,7 @@ void getmynewbits(int &label, double &length,string &mystring, vector<string> &m
 	string labelstring, lengthstring;
 	int bracketlevel=1;
 	string mynewstring;
-	for(int pi1=1; pi1<mystring.size(); pi1++)
+	for(unsigned int pi1=1; pi1<mystring.size(); pi1++)
 	{
 		char c=mystring[pi1];
 
@@ -1210,7 +1209,7 @@ void getmynewbits(int &label, double &length,string &mystring, vector<string> &m
 
 		if(bracketlevel==0)
 		{
-			string mynewstring2;  for(int yhb=0; yhb<mynewstring.size()-1; yhb++) mynewstring2+=mynewstring[yhb];
+			string mynewstring2;  for(unsigned int yhb=0; yhb<mynewstring.size()-1; yhb++) mynewstring2+=mynewstring[yhb];
 
 			mynewbits.push_back(mynewstring2); mynewstring=""; bracketlevel=-1;
 		}
@@ -1317,7 +1316,7 @@ void makeprintseqINT(int partition, int expectedcount, vector<int> &inspos, vect
 
 		vector<site>* s=&( (*ii).insertvec );
 
-		for(int j=0; j<(*s).size(); j++)
+		for(unsigned int j=0; j<(*s).size(); j++)
 		{
 			#ifdef checkpinv
 				if(type==3) controlerrorprint2("[SIMULATION]", "","","Type should not be 3 when using checkpinv compiler option.","");
@@ -1335,8 +1334,8 @@ void makeprintseqINT(int partition, int expectedcount, vector<int> &inspos, vect
 		}
 	}
 
-
-	for(int i=1; i<tempintseq.size(); i++)
+// (M.E.) 2017: This has been updated, printing was missing first nucleotide
+	for(unsigned int i=0; i<tempintseq.size(); i++)
 	{
 
 		#ifdef checkpinv
@@ -1366,7 +1365,7 @@ void makeprintseqINT(int partition, int expectedcount, vector<int> &inspos, vect
 
 			vector<site>* s=&( (*ii).insertvec );
 
-			for(int j=0; j<(*s).size(); j++)
+			for(unsigned int j=0; j<(*s).size(); j++)
 			{
 				#ifdef checkpinv
 					if(type==3) controlerrorprint2("[SIMULATION]", "","","Type should not be 3 when using checkpinv compiler option.","");
@@ -1423,7 +1422,7 @@ void makeprintseqLEAF(int partition, int expectedcount, vector<int> &inspos, vec
 
 		vector<site>* s=&( (*ii).insertvec );
 
-		for(int j=0; j<(*s).size(); j++)
+		for(unsigned int j=0; j<(*s).size(); j++)
 		{
 			#ifdef checkpinv
 				if(type==3) controlerrorprint2("[SIMULATION]","","","Type should not be 3 when using checkpinv compiler option.","");
@@ -1445,10 +1444,8 @@ void makeprintseqLEAF(int partition, int expectedcount, vector<int> &inspos, vec
 		}
 	}
 
-
-
-
-	for(int i=1; i<tempintseq.size(); i++)
+    // (M.E.) 2017: This has been updated, printing was missing first nucleotide
+	for(unsigned int i=0; i<tempintseq.size(); i++)
 	{
 		#ifdef checkpinv
 			if(type==3) controlerrorprint2("[SIMULATION]", "","","Type should not be 3 when using checkpinv compiler option.","");
@@ -1482,7 +1479,7 @@ void makeprintseqLEAF(int partition, int expectedcount, vector<int> &inspos, vec
 
 			vector<site>* s=&( (*ii).insertvec );
 
-			for(int j=0; j<(*s).size(); j++)
+			for(unsigned int j=0; j<(*s).size(); j++)
 			{
 				#ifdef checkpinv
 					if(type==3) controlerrorprint2("[SIMULATION]", "","","Type should not be 3 when using checkpinv compiler option.","");
@@ -1940,7 +1937,9 @@ int findpos1(int event, vector<int> &updatepositions, double unirand, SUMS &sum,
 
 	int pos1=-1, pos10=-1, pos100=-1, pos1000=-1, pos10000=-1, pos100000=-1, pos1000000=-1, pos10000000=-1, pos100000000=-1, pos1000000000=-1, pos=-1;
 
-	S=0;	double s=0;	int i,j;
+	S=0;	double s=0;
+    unsigned int i;
+    int j;
 
 // substitution in inserted sites
 
@@ -1974,7 +1973,7 @@ int findpos0(int event, vector<int> &updatepositions, double unirand, SUMS &sum,
 
 	int pos1=-1, pos10=-1, pos100=-1, pos1000=-1, pos10000=-1, pos100000=-1, pos1000000=-1, pos10000000=-1, pos100000000=-1, pos1000000000=-1, pos=-1;
 
-	S=0;    double s=0;  	int i,j;
+	S=0;    double s=0;  	unsigned int i; int j;
 
 	// substitution in core sequence
 		for(i=0; i<(sum.CSsums).size(); i++)			{s=(sum.CSsums).at(i);			if(unirand<=s+S) {j=10*i; updatepositions.push_back(i); pos1000000000=i; break;}	else S+=s; } if(pos1000000000==-1) {cout<<"ERROR in findpos at event "<<event<<endl; return -1;}
@@ -2019,7 +2018,7 @@ int findpos24(int event, vector<int> &updatepositions,  int mypos, SUMS &sum,  i
 
 	SI=0;
 
-	int i,j, si=0;
+	unsigned int i; int j, si=0;
 
 	// indel in core sequence
 
@@ -2057,7 +2056,7 @@ int findpos35(int event, vector<int> &updatepositions,  int mypos, SUMS &sum,  i
 
 	SI=0;
 
-	int i,j, si=0;
+	unsigned int i;int j, si=0;
 
 	//indel in inserted sites
 		for(i=0; i<(sum.IIsums).size(); i++)			{si=(sum.IIsums).at(i);				if(mypos<=si+SI && si+SI!=0) {j=10*i; updatepositions.push_back(i); pos1000000000=i; break;}	else SI+=si; } if(pos1000000000==-1) {cout<<"ERROR in findpos1 at event "<<event<<endl; return -1;}
@@ -2859,7 +2858,7 @@ int goodcount=0, badcount=0;
 
 			currentev=findpos0(event, updatepositions, unirand,  sums, dsumreached);
 
-			if(currentev==-1) {double yh=0; for(int fg=0; fg<sums.CSsums.size(); fg++) yh+=(sums.CSsums).at(fg);	cout<<endl<<endl<<" ERROR ERROR 0  yh total is "<<yh<<" as compared to "<<rates.coresubrate<<" rates and "<<unirand<<" unirand."<<endl<<"yh - rates "<<yh-rates.coresubrate<<" yh-unirand "<<yh-unirand<<" unirand - rates "<<unirand-rates.coresubrate<<endl; }
+			if(currentev==-1) { double yh=0; for(unsigned int fg=0; fg<sums.CSsums.size(); fg++) yh+=(sums.CSsums).at(fg);  cout<<endl<<endl<<" ERROR ERROR 0  yh total is "<<yh<<" as compared to "<<rates.coresubrate<<" rates and "<<unirand<<" unirand."<<endl<<"yh - rates "<<yh-rates.coresubrate<<" yh-unirand "<<yh-unirand<<" unirand - rates "<<unirand-rates.coresubrate<<endl; }
 
 			currentbase=newseqINT.at(currentev);
 
@@ -2905,13 +2904,13 @@ int goodcount=0, badcount=0;
 
 			currentev=findpos1(event, updatepositions, unirand, sums, dsumreached);
 
-			if(currentev==-1) {double yh=0; for(int fg=0; fg<sums.ISsums.size(); fg++) yh+=(sums.ISsums).at(fg);	cout<<endl<<endl<<" ERROR ERROR 0  yh total is "<<yh<<" as compared to "<<rates.coresubrate<<" rates and "<<unirand<<" unirand."<<endl<<"yh - rates "<<yh-rates.inssubrate<<" yh-unirand "<<yh-unirand<<" unirand - rates "<<unirand-rates.inssubrate<<endl; }
+			if(currentev==-1) { double yh=0; for(unsigned int fg=0; fg<sums.ISsums.size(); fg++) yh+=(sums.ISsums).at(fg); cout<<endl<<endl<<" ERROR ERROR 0  yh total is "<<yh<<" as compared to "<<rates.coresubrate<<" rates and "<<unirand<<" unirand."<<endl<<"yh - rates "<<yh-rates.inssubrate<<" yh-unirand "<<yh-unirand<<" unirand - rates "<<unirand-rates.inssubrate<<endl; }
 
 			ii=&(insINT2.at(insPOS2.at(currentev)));
 
 			ss=&((*ii).insertvec);
 
-			int templength=(*ss).size();
+			unsigned int templength=(*ss).size();
 
 			double odsumreached=dsumreached;
 
@@ -3049,11 +3048,11 @@ if (badcount!=0) cout<<"ERROR on branch with label "<<label<<" the goodcount is 
 					newseqINT.at(core)=currentbase;
 				}
 
-				for(int ins=0; ins<insINT2.size(); ins++)
+				for(unsigned int ins=0; ins<insINT2.size(); ins++)
 				{
 					ss=&((insINT2.at(ins)).insertvec);
 
-					for(int j=0; j<(*ss).size(); j++)
+					for(unsigned int j=0; j<(*ss).size(); j++)
 					{
 						s=&((*ss).at(j));
 
@@ -3102,11 +3101,11 @@ if (badcount!=0) cout<<"ERROR on branch with label "<<label<<" the goodcount is 
 
 				}
 
-				for(int ins=0; ins<insINT2.size(); ins++)
+				for(unsigned int ins=0; ins<insINT2.size(); ins++)
 				{
 					ss=&((insINT2.at(ins)).insertvec);
 
-					for(int j=0; j<(*ss).size(); j++)
+					for(unsigned int j=0; j<(*ss).size(); j++)
 					{
 						s=&((*ss).at(j));
 
@@ -3170,14 +3169,14 @@ if (badcount!=0) cout<<"ERROR on branch with label "<<label<<" the goodcount is 
 
 			//fgh.assign(5,0);
 //			cout<<"insINT2.size() "<<insINT2.size()<<endl;
-			for(int ins=0; ins<insINT2.size(); ins++)
+			for(unsigned int ins=0; ins<insINT2.size(); ins++)
 			{
 
 				ss=&((insINT2.at(ins)).insertvec);
 
 //				cout<<"(*ss).size() "<<(*ss).size()<<endl;
 
-				for(int j=0; j<(*ss).size(); j++)
+				for(unsigned int j=0; j<(*ss).size(); j++)
 				{
 					s=&((*ss).at(j));
 
@@ -3229,7 +3228,7 @@ int findnext(vector<double> currenttime)
 	double max=0;
 	int maxpos=-1;
 
-	for(int yg=0; yg<currenttime.size(); yg++)
+	for(unsigned int yg=0; yg<currenttime.size(); yg++)
 	{
 		double x=currenttime.at(yg);
 		if(x>max)	{max=x; maxpos=yg;}
@@ -3352,13 +3351,13 @@ void evolvebranch(vector<vector<int> > &insPOS, /*vector<int> &oldinsPOSin,*/ RA
 
 					vector<insert>* ins=&(insINT.at(label));
 
-					for(int t2=0; t2<(*ins).size(); t2++)
+					for(unsigned int t2=0; t2<(*ins).size(); t2++)
 					{
 						insert* ii=&((*ins).at(t2));
 
 						vector<site>* s=&( (*ii).insertvec );
 
-						for(int t3=0; t3<(*s).size(); t3++)
+						for(unsigned int t3=0; t3<(*s).size(); t3++)
 						{
 							site* ss=&((*s).at(t3));
 
@@ -3381,19 +3380,19 @@ void evolvebranch(vector<vector<int> > &insPOS, /*vector<int> &oldinsPOSin,*/ RA
 				{
 					mymods.push_back(mypos);
 
-					for(int t1=0; t1<rates.rootlength; t1++) {ratevec.at(t1)=((*m).Rrates).at(siteclassvec.at(t1));}
+					for( int t1=0; t1<rates.rootlength; t1++) {ratevec.at(t1)=((*m).Rrates).at(siteclassvec.at(t1));}
 
 
 					vector<insert>* ins=&(insINT.at(label));
 
 
-					for(int t2=0; t2<(*ins).size(); t2++)
+					for(unsigned int t2=0; t2<(*ins).size(); t2++)
 					{
 						insert* ii=&((*ins).at(t2));
 
 						vector<site>* s=&( (*ii).insertvec );
 
-						for(int t3=0; t3<(*s).size(); t3++)
+						for(unsigned int t3=0; t3<(*s).size(); t3++)
 						{
 							site* ss=&((*s).at(t3));
 
@@ -3435,7 +3434,7 @@ func(branchID, length, rates, sequencesINT.at(label), insINT.at(label),  sums, i
 	{
 		// mymode = -1 when terminal branch
 		// so this if bracket recursively calls evolvebranch on the daughter branches of the current branch
-		for(int asdf3=0; asdf3< mynewbits.size(); asdf3++)
+		for(unsigned int asdf3=0; asdf3< mynewbits.size(); asdf3++)
 		{
 			string mynextbit=mynewbits.at(asdf3);
 			evolvebranch(insPOS, /*insPOS.at(label),*/ rates, newID, branchID, totalpartitions, partitionnumber, insINT, /*insINT.at(label),*/ label, sequencesINT,mynextbit,
@@ -3491,7 +3490,7 @@ int settreeup(int partitionnumber, string &originaltree, string &nonamestree, st
 	error=gettaxanames(partitionnumber, originaltree,taxanames);
 
 	ntaxa=taxanames.size()-2;
-	if(printon==1) for(int gn1=0; gn1<taxanames.size(); gn1++){cout<<gn1<<" "<<taxanames.at(gn1)<<endl<<" ";}
+	if(printon==1) for(unsigned int gn1=0; gn1<taxanames.size(); gn1++){cout<<gn1<<" "<<taxanames.at(gn1)<<endl<<" ";}
 	nonamestree=taxanames.at(taxanames.size()-1);
 	taxanames.pop_back();
 
@@ -3592,9 +3591,9 @@ void controlerrorprint(int blocknumber, string instring, int linecount, string m
 
 	string tempstring;
 	char c;
-	int themaxsize=startline.size();
+	unsigned int themaxsize=startline.size();
 
-	for(int j0=0; j0<instring.size(); j0++)
+	for(unsigned int j0=0; j0<instring.size(); j0++)
 	{
 		c=instring[j0];
 		if(c=='\n')
@@ -3611,21 +3610,21 @@ void controlerrorprint(int blocknumber, string instring, int linecount, string m
 
 	cout<<endl<<endl; (*LOG)<<endl;
 
-	for(int i0=0; i0<toprint.size(); i0++)
+	for(unsigned int i0=0; i0<toprint.size(); i0++)
 	{
 		string tempstring2=toprint.at(i0);
-		for(int h1=tempstring2.size(); h1<themaxsize; h1++) tempstring2+=" ";
+		for(unsigned int h1=tempstring2.size(); h1<themaxsize; h1++) tempstring2+=" ";
 		toprint.at(i0)=tempstring2;
 	}
 
 	cout<<endl<<" +";  (*LOG)<<endl<<"+";
-	for(int i1=0; i1<themaxsize+2; i1++) {cout<<"-"; (*LOG)<<"-";}
+	for(unsigned int i1=0; i1<themaxsize+2; i1++) {cout<<"-"; (*LOG)<<"-";}
 	cout<<"+"<<endl;	(*LOG)<<"+"<<endl;
 
-	for(int i2=0; i2<toprint.size(); i2++) {cout<<" | "<<toprint.at(i2)<<" |"<<endl; (*LOG)<<"| "<<toprint.at(i2)<<" |"<<endl;}
+	for(unsigned int i2=0; i2<toprint.size(); i2++) {cout<<" | "<<toprint.at(i2)<<" |"<<endl; (*LOG)<<"| "<<toprint.at(i2)<<" |"<<endl;}
 
 	cout<<" +"; (*LOG)<<"+";
-	for(int i3=0; i3<themaxsize+2; i3++) {cout<<"-"; (*LOG)<<"-";}
+	for(unsigned int i3=0; i3<themaxsize+2; i3++) {cout<<"-"; (*LOG)<<"-";}
 	cout<<"+"<<endl<<endl;	(*LOG)<<"+"<<endl<<endl;
 
 
@@ -3768,7 +3767,7 @@ void printresultsout(int currentrep,  string filenamestub, int ntaxa, int myleng
 
 		//	PrintProgress2( blocknumber,  numberofevolveblocks,  thisrep,  reps, printcount);
 
-			for(int j=0; j<TsequencesINT.size(); j++) makeprintseqLEAF(j,lastlengthcount, (TinsPOS.at(j)).at(i), (TsequencesINT.at(j)).at(i), (TinsINT.at(j)).at(i), i, (*results), (*results2),  0) ;
+			for(unsigned int j=0; j<TsequencesINT.size(); j++) makeprintseqLEAF(j,lastlengthcount, (TinsPOS.at(j)).at(i), (TsequencesINT.at(j)).at(i), (TinsINT.at(j)).at(i), i, (*results), (*results2),  0) ;
 			(*results)<<"     "<<endl; (*results2)<<"     "<<endl;
 		}
 
@@ -3793,7 +3792,7 @@ if(ancestralprint)
 				// This if loop will print the ancestral sequences into results3
 				// but only if there is one partition.
 				// This is because a multi-partition simulation could have different underlying guide tree topologies
-				for(int i=ntaxa+1; i<(TsequencesINT.at(0)).size()-1; i++)
+				for(unsigned int i=ntaxa+1; i<(TsequencesINT.at(0)).size()-1; i++)
 				{
 					//Ancestral Sequences into results3
 					//if(hf2!=seqINTsize-1)
@@ -3806,7 +3805,7 @@ if(ancestralprint)
 
 				//		PrintProgress2( blocknumber,  numberofevolveblocks,  thisrep,  reps, printcount);
 
-						for(int j=0; j<TsequencesINT.size(); j++) makeprintseqINT(j,lastlengthcount, (TinsPOS.at(j)).at(i), (TsequencesINT.at(j)).at(i),(TinsINT.at(j)).at(i),i,(*results3), 1);
+						for(unsigned int j=0; j<TsequencesINT.size(); j++) makeprintseqINT(j,lastlengthcount, (TinsPOS.at(j)).at(i), (TsequencesINT.at(j)).at(i),(TinsINT.at(j)).at(i),i,(*results3), 1);
 						(*results3)<<"     "<<endl;
 
 					//}
@@ -3824,7 +3823,7 @@ if(ancestralprint)
 //		PrintProgress2( blocknumber,  numberofevolveblocks,  thisrep,  reps, printcount);
 //		cout<<" Printing root."<<endl;
 
-		for(int j=0; j<TsequencesINT.size(); j++) makeprintseqINT(j,lastlengthcount, (TinsPOS.at(j)).at(0), (TsequencesINT.at(j)).at(0),(TinsINT.at(j)).at(0),0,*results3, 1);
+		for(unsigned int j=0; j<TsequencesINT.size(); j++) makeprintseqINT(j,lastlengthcount, (TinsPOS.at(j)).at(0), (TsequencesINT.at(j)).at(0),(TinsINT.at(j)).at(0),0,*results3, 1);
 		(*results3)<<"     "<<endl;
 	}
 	else
@@ -3838,19 +3837,19 @@ if(ancestralprint)
 			// This if loop will print the ancestral sequences into (*results3)
 			// but only if there is one partition.
 			// This is because a multi-partition simulation could have different underlying guide tree topologies
-			for(int i=ntaxa+1; i<(TsequencesINT.at(0)).size()-1; i++)
+			for(unsigned int i=ntaxa+1; i<(TsequencesINT.at(0)).size()-1; i++)
 			{
 				//Ancestral Sequences into (*results3)
 				if(outputtype==1) (*results)<<">";
 				stringstream hg; hg<<i; string rf="N"+hg.str();
 				//results<<"N"<<i<<"\t";
-				(*results)<<rf; for(int gv=0; gv<dsize-rf.size(); gv++) (*results)<<" ";
+				(*results)<<rf; for(unsigned int gv=0; gv<dsize-rf.size(); gv++) (*results)<<" ";
 				if(outputtype==1) (*results)<<""<<endl;
 
 				printcount++;
 		//		PrintProgress2( blocknumber,  numberofevolveblocks,  thisrep,  reps, printcount);
 
-				for(int j=0; j<TsequencesINT.size(); j++) makeprintseqINT(j,lastlengthcount, (TinsPOS.at(j)).at(i), (TsequencesINT.at(j)).at(i),(TinsINT.at(j)).at(i),i,*results, 1);
+				for(unsigned int j=0; j<TsequencesINT.size(); j++) makeprintseqINT(j,lastlengthcount, (TinsPOS.at(j)).at(i), (TsequencesINT.at(j)).at(i),(TinsINT.at(j)).at(i),i,*results, 1);
 				(*results)<<"     "<<endl;
 
 			}
@@ -3868,7 +3867,7 @@ if(ancestralprint)
 		//PrintProgress2( blocknumber,  numberofevolveblocks,  thisrep,  reps, printcount);
 	//	cout<<" Printing root."<<endl;
 
-		for(int j=0; j<TsequencesINT.size(); j++) makeprintseqINT(j,lastlengthcount, (TinsPOS.at(j)).at(0), (TsequencesINT.at(j)).at(0),(TinsINT.at(j)).at(0),0,*results, 1);
+		for(unsigned int j=0; j<TsequencesINT.size(); j++) makeprintseqINT(j,lastlengthcount, (TinsPOS.at(j)).at(0), (TsequencesINT.at(j)).at(0),(TinsINT.at(j)).at(0),0,*results, 1);
 		(*results)<<"     "<<endl;
 
 	}
@@ -3924,7 +3923,7 @@ int printfreqs(vector<int> &seq)
 
 		string cod=CDU.at(seqpos);
 
-		for(int k=0; k<stops.size(); k++) if(seqpos==stops.at(k)) {if(stopcount<10) cout<<"STOP CODON "<<seqpos<<"  "<<cod<<endl; stopcount++;}
+		for(unsigned int k=0; k<stops.size(); k++) if(seqpos==stops.at(k)) {if(stopcount<10) cout<<"STOP CODON "<<seqpos<<"  "<<cod<<endl; stopcount++;}
 
 //		cout<< cod<<endl;
 //		cout<<y<<" y2"<<endl;
@@ -4047,104 +4046,105 @@ void setuprootseq2(RATES &rates,	vector<int> &rootseqINT,
 	sequencesINT.clear();	sequencesINT.assign(mysize,blank1);
 	insPOS.clear();			insPOS.assign(mysize,blank1);
 	insINT.clear();			insINT.assign(mysize,blank2);
-
 	//for(int gn1=0; gn1<taxanames.size()+1; gn1++) {sequencesINT.push_back(blank1); insINT.push_back(blank2); 	cout<<"QWERTY   6-"<<gn1<<endl;}
-
 	if(partitionnumber==0) dashlength=0;	// reset the count of how many inserted characters have occurred - treewide
-
-
 #ifndef checkingindelsininsertions
+	if(rootseqINT.empty()) {
+        //cout<<"rates.rootlength "<<rates.rootlength<<endl;
+        //  for (int index=0; index<rates.rootlength;index++){
+        //    sequencesINT.at(0).push_back(2); // A*root length reference
+        //  }
+        string nucleotides="TCAGtcag";
+        ifstream refstream;
+        vector<char> allchars, word;
+        vector<string> references, descriptions;
+        string wordstring;
+        refstream.open(referencefilename.c_str());
+        while(refstream.good()){ char c=refstream.get();  allchars.push_back(c); }
+        refstream.close();
 
-	if(rootseqINT.empty()) {//cout<<"rates.rootlength "<<rates.rootlength<<endl;
-    //  for (int index=0; index<rates.rootlength;index++){
-    //    sequencesINT.at(0).push_back(2); // A*root length reference
-    //  }
-    string nucleotides="TCAGtcag";
-    ifstream refstream;
-    vector<char> allchars, word;
-    vector<string> references, descriptions;
-    string wordstring;
-    refstream.open(referencefilename.c_str());
-    while(refstream.good()){ char c=refstream.get();  allchars.push_back(c); }
-    // cout <<"Read all characters from the reference file"<<endl;
-    bool endDescription=false;    bool referenceFasta=false;
-    char c;
-    for (unsigned int index=0; index<allchars.size();index++){
-      c=allchars.at(index);
-      if (!endDescription){ // First N
-        if (!AinB(c,"\n\r")){word.push_back(c);}
-        else{endDescription=true;}
-        if (endDescription){
-          wordstring=std::string(word.begin(),word.end());
-          descriptions.push_back(wordstring);
-          wordstring.clear(); word.clear();
+        // cout <<"Read all characters from the reference file"<<endl;
+        bool endDescription=false;    bool referenceFasta=false;
+        char c;
+        for (unsigned int index=0; index<allchars.size();index++){
+          c=allchars.at(index);
+          if (!endDescription){ // First N
+            if (!AinB(c,"\n\r")){word.push_back(c);}
+            else{endDescription=true;}
+            if (endDescription){
+              wordstring=std::string(word.begin(),word.end());
+              descriptions.push_back(wordstring);
+              wordstring.clear(); word.clear();
+            }
+          }
+//          cout  <<"[NGSPhy I/O] Index "<< (index)<<"\tCHAR: "<<c<<endl;
+
+          if (endDescription){
+            if (AinB(c,nucleotides) && !AinB(c,"\n\r\t ")){
+              word.push_back(c);
+            }
+
+            if(AinB(c,">") || ((index+1)==allchars.size())){
+              endDescription=false;
+              wordstring=std::string(word.begin(),word.end());
+              references.push_back(wordstring);
+              wordstring.clear();
+              word.clear();
+              break;
+            }
+
+          }
         }
-      }
-      if (endDescription){
-        if (AinB(c,nucleotides) && !AinB(c,"\n\r\t ")){
-          word.push_back(c);
+
+        // cout<<"partitionname: " <<partitionname<<endl;
+        // cout<<"descriptions.size(): "<<descriptions.size()<<endl;
+
+        word.clear(); wordstring.clear();
+        string tmpDescription;
+        unsigned int partitionRef=0;
+        for (unsigned int index=0; index<descriptions.size();index++){
+          tmpDescription=descriptions.at(index).substr(1,descriptions.at(index).size());
+        //   cout <<index<<" | "<<tmpDescription<<endl;
+          if (partitionname==tmpDescription){
+            partitionRef=index;
+          }
         }
-        if(AinB(c,">") || ((index+1)==allchars.size())){
-          endDescription=false;
-          wordstring=std::string(word.begin(),word.end());
-          references.push_back(wordstring);
-          wordstring.clear();
-          word.clear();
-          word.push_back(c);
+        // cout << references.at(partitionRef)<<endl;
+        tmpDescription=descriptions.at(partitionRef).substr(1,descriptions.at(partitionRef).size());
+        // cout  <<tmpDescription<<endl;
+        // cout  <<partitionRef<<endl;
+        if(partitionname!=tmpDescription){
+          controlerrorprint2("[NGSPhy I/O]", "","","Reference sequence description does not match to any partition name.\nPlease verify","");
+          exit(-1);
         }
+        c=descriptions.at(partitionRef).at(0);
 
-      }
-    }
-    refstream.close();
-    // cout<<"partitionname: " <<partitionname<<endl;
-    // cout<<"descriptions.size(): "<<descriptions.size()<<endl;
-    // cout<<"references.size(): "<<references.size()<<endl;
-
-    word.clear(); wordstring.clear();
-    string tmpDescription;
-    unsigned int partitionRef=0;
-    for (unsigned int index=0; index<descriptions.size();index++){
-      tmpDescription=descriptions.at(index).substr(1,descriptions.at(index).size());
-    //   cout <<index<<" | "<<tmpDescription<<endl;
-      if (partitionname==tmpDescription){
-        partitionRef=index;
-      }
-    }
-    tmpDescription=descriptions.at(partitionRef).substr(1,descriptions.at(partitionRef).size());
-    // cout  <<tmpDescription<<endl;
-    // cout  <<partitionRef<<endl;
-    if(partitionname!=tmpDescription){
-      controlerrorprint2("[NGSPhy I/O]", "","","Reference sequence description does not match to any partition name.\nPlease verify","");
-      exit(-1);
-    }
-    c=descriptions.at(partitionRef).at(0);
-
-    if (AinB(c,">")){ referenceFasta=true;  }
-    if (!referenceFasta){
-      controlerrorprint2("[NGSPhy I/O]", "","","Reference file is not in the proper FASTA format.\nPlease verify","");
-      exit(-1);
-    }
-    if(references.at(partitionRef).size() > (unsigned int) rates.rootlength){
-      controlerrorprint2("[NGSPhy I/O]", "","","Reference sequence size do not match partition root length.\nPlease verify","");
-      exit(-1);
-    }
-    cout  <<c<<endl;
-    cout  <<"validation"<<endl;
-
-    for (unsigned int index=0; index<references.at(partitionRef).size();index++){
-        c=references.at(partitionRef).at(index);
-        if(AinB(c,nucleotides) && (sequencesINT.size() <= (unsigned int) rates.rootlength)){
-          if (AinB(c,"Tt")){sequencesINT.at(0).push_back(0);}
-          if (AinB(c,"Cc")){sequencesINT.at(0).push_back(1);}
-          if (AinB(c,"Aa")){sequencesINT.at(0).push_back(2);}
-          if (AinB(c,"Gg")){sequencesINT.at(0).push_back(3);}
+        if (AinB(c,">")){ referenceFasta=true;  }
+        if (!referenceFasta){
+          controlerrorprint2("[NGSPhy I/O]", "","","Reference file is not in the proper FASTA format.\nPlease verify","");
+          exit(-1);
         }
-    }
-    rates.rootlength=sequencesINT.at(0).size();
-    cout  <<"reference sequence read"<<endl;
+        // (M.E.) 2017: the rootlenght has a +1
+        if((references.at(partitionRef).size()+1) != (unsigned int) rates.rootlength){
+          controlerrorprint2("[NGSPhy I/O]", "","","Reference sequence size does not match partition root length.\nPlease verify","");
+          exit(-1);
+        }
+        cout  <<"[NGSPhy I/O] Validation ended."<<endl;
 
-	}else
-	{
+        for (unsigned int index=0; index<references.at(partitionRef).size();index++){
+            c=references.at(partitionRef).at(index);
+            if(AinB(c,nucleotides) && (sequencesINT.size() <= (unsigned int) rates.rootlength)){
+              if (AinB(c,"Tt")){sequencesINT.at(0).push_back(0);}
+              if (AinB(c,"Cc")){sequencesINT.at(0).push_back(1);}
+              if (AinB(c,"Aa")){sequencesINT.at(0).push_back(2);}
+              if (AinB(c,"Gg")){sequencesINT.at(0).push_back(3);}
+            }
+        }
+        // for(unsigned int i=0; i<sequencesINT.at(0).size(); i++){ cout<<sequencesINT.at(0).at(i); } cout<<endl;
+        rates.rootlength=sequencesINT.at(0).size();
+        cout  <<"[NGSPhy I/O] Reference sequence read with "<< rates.rootlength<<" bp"<<endl;
+
+	}else{
 		(sequencesINT.at(0)).push_back(-1);
 		(sequencesINT.at(0)).insert((sequencesINT.at(0)).end(), rootseqINT.begin(),rootseqINT.end());
 		rootseqINT.clear();
@@ -4161,9 +4161,6 @@ void setuprootseq2(RATES &rates,	vector<int> &rootseqINT,
 #else
 
 	vector<site> insertseq;  (insINT.at(0)).push_back(insert(insertseq,0,0)); (insPOS.at(0)).push_back(-1);
-
-
-
 	int num=int(  double(rates.rootlength - 1)/double(10) );
 
 	for(int yg=0; yg<num; yg++) (sequencesINT.at(0)).push_back(-1);
@@ -4179,8 +4176,6 @@ void setuprootseq2(RATES &rates,	vector<int> &rootseqINT,
 	}
 
 	rates.corelength=1; rates.rootlength=rates.partitionlength=num; rates.inslength=10*num;
-
-
 
 //	cout<<(insPOS.at(0)).size()<<"  "<<(sequencesINT.at(0)).size()<<"  "<<(insINT.at(0)).size()<<endl;
 
@@ -4227,7 +4222,7 @@ void printoutrates(int &sitecount,int partition, ofstream &ratesout, vector<int>
 
 	if(type!=3)
 	{
-		int i;
+		unsigned int i;
 		//eternal link
 		if(inspos.at(0)!=-1)
 		{
@@ -4235,7 +4230,7 @@ void printoutrates(int &sitecount,int partition, ofstream &ratesout, vector<int>
 
 			vector<site>* s=&( (*ii).insertvec );
 
-			for(int j=0; j<(*s).size(); j++)
+			for(unsigned int j=0; j<(*s).size(); j++)
 			{
 				sitecount++; ratesout<<sitecount<<"\t";
 				if((*m).continuousgamma)  {} else ratesout<<((*s).at(j)).siteclass+1<<"\t";
@@ -4243,7 +4238,9 @@ void printoutrates(int &sitecount,int partition, ofstream &ratesout, vector<int>
 			}
 		}
 
-		vector<string> ratevec2,sitevec2,insYN; int maxsize=0,maxsize2=0,diff2, diff;
+		vector<string> ratevec2,sitevec2,insYN;
+        unsigned int maxsize=0,maxsize2=0;
+        int diff2, diff;
 
 		for(i=1 ; i<ratevec.size(); i++)
 		{
@@ -4261,7 +4258,7 @@ void printoutrates(int &sitecount,int partition, ofstream &ratesout, vector<int>
 
 				vector<site>* s=&( (*ii).insertvec );
 
-				for(int j=0; j<(*s).size(); j++)
+				for(unsigned int j=0; j<(*s).size(); j++)
 				{
 					stringstream ds; ds<<((*s).at(j)).rate;      string sd=ds.str(); diff=sd.size(); if(diff>maxsize) maxsize=diff; ratevec2.push_back(sd); insYN.push_back("INSERTION");
 					stringstream dq; dq<<((*s).at(j)).siteclass+1; string sq=dq.str(); diff=sq.size(); if(diff2>maxsize2) maxsize2=diff; sitevec2.push_back(sq);
@@ -4304,11 +4301,11 @@ void printoutrates(int &sitecount,int partition, ofstream &ratesout, vector<int>
 			vector<site>* s=&( (*ii).insertvec );
 
 			//for(int j=0; j<(*s).size(); j++) {sitecount++; ratesout<<sitecount<<"\t"<<myrates.at(((*s).at(j)).siteclass)<<"\tY\t"<<partition<<endl;}
-			for(int j=0; j<(*s).size(); j++) {sitecount++; ratesout<<sitecount<<"\t"<<((*s).at(j)).siteclass<<"\t"<<partition<<"\tINSERTION"<<endl;}
+			for(unsigned int j=0; j<(*s).size(); j++) {sitecount++; ratesout<<sitecount<<"\t"<<((*s).at(j)).siteclass<<"\t"<<partition<<"\tINSERTION"<<endl;}
 		}
 
 
-		for(int i=1; i<ratevec.size(); i++)
+		for(unsigned int i=1; i<ratevec.size(); i++)
 		{
 			sitecount++;
 
@@ -4322,7 +4319,7 @@ void printoutrates(int &sitecount,int partition, ofstream &ratesout, vector<int>
 
 				vector<site>* s=&( (*ii).insertvec );
 
-				for(int j=0; j<(*s).size(); j++) {sitecount++; ratesout<<sitecount<<"\t"<<((*s).at(j)).siteclass <<"\t"<<partition<<"\tINSERTION"<<endl;}
+				for(unsigned int j=0; j<(*s).size(); j++) {sitecount++; ratesout<<sitecount<<"\t"<<((*s).at(j)).siteclass <<"\t"<<partition<<"\tINSERTION"<<endl;}
 			}
 		}
 	}
@@ -4468,7 +4465,7 @@ y<<"0.000000000025"<<endl<<"0.000000000022"<<endl<<"0.00000000002"<<endl<<"0.000
 	    timestaken.push_back( (double)(finish - start) / CLOCKS_PER_SEC);
 
 		names.push_back(  ((*m).name)+"_del"  );
-		for(int j=0; j<lines.size(); j++) (lines.at(j)).push_back(double(counts.at(j))/double(total));
+		for(unsigned int j=0; j<lines.size(); j++) (lines.at(j)).push_back(double(counts.at(j))/double(total));
 
 	}
 
@@ -4477,7 +4474,7 @@ y<<"0.000000000025"<<endl<<"0.000000000022"<<endl<<"0.00000000002"<<endl<<"0.000
 	iop<<"mean length\t";for(i=0; i<means.size(); i++) iop<<means.at(i)<<"\t"; iop<<endl;
 	iop<<"true mean  \t";for(i=0; i<means.size(); i++) iop<<means2.at(i)<<"\t"; iop<<endl;
 
-	for(int j=0; j<lines.size(); j++)
+	for(unsigned int j=0; j<lines.size(); j++)
 	{
 		iop<<j<<"\t";
 		vector<double> bits=lines.at(j);
@@ -4815,13 +4812,13 @@ LOG = new ofstream;
                         totalpartitionnames.at(partitionnumber),
                         TsequencesINT.at(partitionnumber), TinsPOS.at(partitionnumber),
                         TinsINT.at(partitionnumber), sums);
+                    // cout<<rates.rootlength<<endl;
                 }else{
                     setuprootseq(rates, *myrootseq, partitionnumber,
                         TsequencesINT.at(partitionnumber), TinsPOS.at(partitionnumber),
                         TinsINT.at(partitionnumber), sums);
                 }
                 refstream.close();
-
 
 
 				#ifdef timewatch
@@ -4886,7 +4883,7 @@ LOG = new ofstream;
 								ratesout<<"       different branches can be calculated from the rates table below. "<<endl;
 								ratesout<<"       Just remember that the site *class* does not change over the tree."<<endl<<endl;
 
-								int iii, jjj; m=&(totalmodels.at( mymods.at(0) )); int gg= ((*m).Rrates).size();
+								unsigned int iii, jjj; m=&(totalmodels.at( mymods.at(0) )); unsigned int gg= ((*m).Rrates).size();
 
 								ratesout<<"The columns below are the rates for the different classes under the different models."<<endl;
 								ratesout<< "The columns correspond to the following values of alpha used in the simulation:"<<endl<<endl;
@@ -4908,7 +4905,10 @@ LOG = new ofstream;
 										m=&(totalmodels.at( mymods.at(iii) ));
 
 										vector<double> rrates=(*m).Rrates;
-										stringstream jh; jh<<rrates.at(jjj);  string fv=jh.str(); vs.push_back(fv); if(maxsize<fv.size()) maxsize=fv.size();
+										stringstream jh; jh<<rrates.at(jjj);
+                                        string fv=jh.str();
+                                        vs.push_back(fv);
+                                        if(maxsize<fv.size()) maxsize=fv.size();
 									}
 									vvs.push_back(vs);
 								}
@@ -4921,7 +4921,7 @@ LOG = new ofstream;
 									for(iii=0; iii<mymods.size(); iii++)
 									{
 										string za=vs.at(iii);
-										ratesout<<za; for(int dc=0; dc<maxsize-za.size(); dc++) ratesout<<" "; ratesout<<"\t";
+										ratesout<<za; for(unsigned int dc=0; dc<maxsize-za.size(); dc++) ratesout<<" "; ratesout<<"\t";
 									}
 									ratesout<<endl;
 								}

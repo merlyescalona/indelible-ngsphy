@@ -1,23 +1,35 @@
 [![Build Status](https://travis-ci.org/merlyescalona/indelible-ngsphy.svg?branch=master)](https://travis-ci.org/merlyescalona/indelible-ngsphy)
 
-# INDELible
+# indelible-ngsphy
 
-This is a modified version of INDELible, A powerful and flexible simulator of biological evolution.
+This is a modified version of INDELible:
 
 [Fletcher, W. and Yang, Z. 2009. INDELible: a flexible simulator of biological sequence evolution. Mol. Biol. and Evol. 2009 26(8):1879-1888](http://abacus.gene.ucl.ac.uk/software/indelible/)
 
-This versions allows the use of an ancestral sequence to evolve for a single partition.
-The name of the sequence file should be `ancestral.fasta`
+This versions allows the use of an ancestral sequence to evolve a **single partition**.
+
+The name of the file that contains the sequence to be used as ancestral has to be:
+
+**`ancestral.fasta`**
+
+If there is no file under this name, `indelible-ngsphy` will run as the original `INDELible`.
+
+## Installation
 
 To install use:
 
 ```
+git clone https:/github.com/merlyescalona/indelible-ngsphy.git
+cd indelible-ngsphy/
 make
 ```
 
 Or follow instructions from the original author in [INSTALL.md](INSTALL.md)
 
-M.E.
+Merly Escalona
+<merlyescalona@uvigo.es>
+
+------
 
 # Original README file
 
