@@ -1335,7 +1335,7 @@ void makeprintseqINT(int partition, int expectedcount, vector<int> &inspos, vect
 	}
 
 // (M.E.) 2017: This has been updated, printing was missing first nucleotide
-	for(unsigned int i=0; i<tempintseq.size(); i++)
+	for(unsigned int i=1; i<tempintseq.size(); i++)
 	{
 
 		#ifdef checkpinv
@@ -1445,7 +1445,7 @@ void makeprintseqLEAF(int partition, int expectedcount, vector<int> &inspos, vec
 	}
 
     // (M.E.) 2017: This has been updated, printing was missing first nucleotide
-	for(unsigned int i=0; i<tempintseq.size(); i++)
+	for(unsigned int i=1; i<tempintseq.size(); i++)
 	{
 		#ifdef checkpinv
 			if(type==3) controlerrorprint2("[SIMULATION]", "","","Type should not be 3 when using checkpinv compiler option.","");
