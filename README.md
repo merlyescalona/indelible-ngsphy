@@ -26,8 +26,7 @@ make
 
 Or follow instructions from the original author in [INSTALL.md](INSTALL.md)
 
-Merly Escalona
-<merlyescalona@uvigo.es>
+Merly Escalona (merly@escalona.com.es)
 
 ------
 
